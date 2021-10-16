@@ -17,6 +17,6 @@ mongoose.connect('mongodb+srv://root:lottelebewohl@berkshire.tgsvp.mongodb.net/B
 
 app.use(routes)
 
-app.listen(3001, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log('its running lol')
 })
