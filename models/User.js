@@ -10,6 +10,7 @@ const UserSchema = new Schema({
   rating: {
     type: Number,
   },
+  ratedTimes: Number,
 });
 
 module.exports = model("User", UserSchema);

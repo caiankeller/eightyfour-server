@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-
-const CountDownSchema = new Schema({
+const RatingSchema = new Schema({
   username: {
     type: Schema.Types.ObjectId,
   },
@@ -10,10 +9,10 @@ const CountDownSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    expires: 10,
+    expires: 1800,
     default: Date.now,
   },
 });
 
 
-module.exports = model("CountDown", CountDownSchema)
+module.exports = model("Rating", RatingSchema)
