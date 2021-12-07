@@ -1,21 +1,19 @@
 {
-  "name": "berkshire",
+  "name": "eightyfour",
   "version": "1.0.0",
-  "description": "black mirror's nosedive clone",
+  "description": "eightyfour rest api",
   "main": "app.js",
-  "author": "vonweinkeller",
+  "author": "von weinkeller",
   "license": "MIT",
-  "private": false,
-  "scripts": {
-    "start": "node app.js"
-  },
+  "private": null,
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "axios": "^0.24.0",
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.11",
-    "nodemon": "^2.0.13",
-    "socket.io": "^4.3.0"
+    "mongoose": "^6.0.13",
+    "nodemon": "^2.0.15"
   }
 }
