@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "eightyfour rest api",
   "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
   "author": "von weinkeller",
   "license": "MIT",
   "private": false,
