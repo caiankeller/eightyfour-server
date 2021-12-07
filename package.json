@@ -2,7 +2,7 @@
   "name": "eightyfour",
   "version": "1.0.0",
   "description": "eightyfour rest api",
-  "main": "app.js",
+  "main": "src/app.js",
   "author": "von weinkeller",
   "license": "MIT",
   "private": null,
