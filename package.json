@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "author": "von weinkeller",
   "license": "MIT",
-  "private": null,
+  "private": false,
   "dependencies": {
     "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
@@ -15,5 +15,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.13",
     "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
