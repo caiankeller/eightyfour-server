@@ -31,7 +31,6 @@ RatingSchema.statics.getAlreadyRated = async function (ratingUser, ratedUser) {
     .find({ ratingUser: ratingUser, ratedUser: ratedUser })
     .then((re) => {
       if (re.length > 0) {
-        console.log(re);
         return { alreadyRated: true, rating: re[0].rating };
       } else {
         return { alreadyRated: false };

@@ -25,14 +25,13 @@ module.exports = {
 
     bcrypt.compare(password, toVerify.password, async (er, re) => {
       if (er) {
-        console.log("trigerred haha babaca");
         return res
           .status(401)
           .send({ message: "user or password incorrect", ok: false });
       }
 
       if (re) {
-        console.log("sexo");
+
         const rating = await Rating.getAverage(toVerify._id);
       
         if (typeof toVerify.song === "undefined") song = "";
