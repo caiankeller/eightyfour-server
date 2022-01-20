@@ -6,7 +6,7 @@ require("dotenv").config();
 
 module.exports = {
   async index(req, res, next) {
-    const token = req.headers["authorization"];
+    const token = req.headers["authorization"].split(" ");
 
     if (!token) res.status(401).send({ message: "token missing", ok: false });
     else
@@ -21,19 +21,20 @@ module.exports = {
     const toVerify = await User.findOne({ username: username });
 
     if (toVerify === null)
-      return res.status(400).send({ message: "user has not found", ok: false });
+      return res
+        .status(400)
+        .send({ message: "There is no user with that username", ok: false });
 
     bcrypt.compare(password, toVerify.password, async (er, re) => {
       if (er) {
         return res
           .status(401)
-          .send({ message: "user or password incorrect", ok: false });
+          .send({ message: "User or password are incorrect", ok: false });
       }
 
       if (re) {
-
         const rating = await Rating.getAverage(toVerify._id);
-      
+
         if (typeof toVerify.song === "undefined") song = "";
         else song = toVerify.song;
 
@@ -46,15 +47,17 @@ module.exports = {
         };
 
         const { _id } = user;
-        const token = jwt.sign({ _id }, process.env.JWT_SECRET, {
+        var token = jwt.sign({ _id }, process.env.JWT_SECRET, {
           expiresIn: 86400,
         });
+
+        token = `Bearer ${token}`;
 
         res.status(200).send({ token: token, user: user, ok: true });
       } else {
         return res
           .status(401)
-          .send({ message: "user or password incorrect", ok: false });
+          .send({ message: "User or password are incorrect", ok: false });
       }
     });
   },

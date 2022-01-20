@@ -10,10 +10,10 @@ module.exports = {
     if ((await alreadyRated.alreadyRated) === true)
       return res
         .status(401)
-        .send({ message: "you already rated this user", ok: false });
+        .send({ message: "You already rated this user", ok: false });
 
     if (rating < 0 || rating > 5)
-      return res.status(400).send({ message: "an error occurs", ok: false });
+      return res.status(400).send({ message: "An error occurs", ok: false });
 
     await Rating.create({
       rating,
