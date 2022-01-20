@@ -6,7 +6,9 @@ require("dotenv").config();
 
 module.exports = {
   async index(req, res, next) {
-    const token = req.headers["authorization"].split(" ");
+    var temp = req.headers["authorization"];
+    var temp = temp.split(" ");
+    const token = temp[1];
 
     if (!token) res.status(401).send({ message: "token missing", ok: false });
     else

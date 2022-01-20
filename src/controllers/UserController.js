@@ -48,7 +48,7 @@ module.exports = {
     const { username } = req.params;
     const ratingUser = req.user;
 
-    var user = await User.findOne({
+    await User.findOne({
       username: new RegExp("^" + username + "$", "i"),
     })
       .select(["-password"])
