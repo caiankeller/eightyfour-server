@@ -2,15 +2,23 @@ const axios = require("axios");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+//please, progress with caution 😂
+//to understand better what happened here
+//i will be just clear, there is layer of jwt token above spotify token
+//this way, the spotify token is mininum hided and i have a controll better
+//of when spotify token is experied, without increasing complexity
 module.exports = {
   async verifyToken(spotifyJWTToken, callback) {
     let er;
-    let re
+    let re;
     jwt.verify(spotifyJWTToken, "spotify", (e, decoded) => {
       if (e) {
         er = true;
       } else {
-        re = {spotifyToken: decoded.access_token, spotifyJWTToken: spotifyJWTToken}
+        re = {
+          spotifyToken: decoded.access_token,
+          spotifyJWTToken: spotifyJWTToken,
+        };
       }
     });
     callback(er, re);

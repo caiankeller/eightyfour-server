@@ -17,5 +17,5 @@ mongoose.connect(process.env.BD_URL);
 app.use(routes);
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log(`running`);
+  console.log(`We've taken off 🛫 on ${process.env.PORT || 3000} port`);
 });

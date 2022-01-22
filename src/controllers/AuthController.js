@@ -5,7 +5,7 @@ const Rating = require("../models/Rating");
 require("dotenv").config();
 
 module.exports = {
-  async index(req, res, next) {
+  async authrization(req, res, next) {
     var temp = req.headers["authorization"];
     var temp = temp.split(" ");
     const token = temp[1];
@@ -18,7 +18,7 @@ module.exports = {
         next();
       });
   },
-  async store(req, res) {
+  async authentication(req, res) {
     const { username, password } = req.query;
     const toVerify = await User.findOne({ username: username });
 

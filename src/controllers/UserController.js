@@ -6,8 +6,10 @@ require("dotenv").config();
 module.exports = {
   async store(req, res) {
     const { username, password, bio, song } = req.body;
+    //lower case every username
+    const user = username.toLowerCase();
 
-    const userExists = await User.findOne({ username: username });
+    const userExists = await User.findOne({ username: user });
 
     if (!username)
       return res
@@ -16,7 +18,7 @@ module.exports = {
     if (userExists)
       return res
         .status(409)
-        .send({ message: "The username already registered", ok: false });
+        .send({ message: "The username already exists", ok: false });
     if (!password)
       return res
         .status(401)
@@ -31,11 +33,12 @@ module.exports = {
         .send({ message: "The password is too long", ok: false });
 
     bcrypt.hash(password, 10, async (er, hash) => {
+      //return 401 if bcrypt failed encrypting password
       if (er)
         return res.status(401).send({ message: "An error occurs", ok: false });
 
       await User.create({
-        username,
+        user,
         password: hash,
         bio,
         song,
@@ -49,7 +52,7 @@ module.exports = {
     const ratingUser = req.user;
 
     await User.findOne({
-      username: new RegExp("^" + username + "$", "i"),
+      username: username,
     })
       .select(["-password"])
       .then(async (user) => {
@@ -59,11 +62,15 @@ module.exports = {
             ok: false,
           });
 
-        const rating = await Rating.getAverage(user._id);
+        //copy user object to user
         user = { ...user._doc };
-        user["rating"] = rating;
+
+        //getting average rating from user, see rating model for futher information
+        user["rating"] = await Rating.getAverage(user._id);
+        //verify if rating user already rated user
         user["userRating"] = await Rating.getAlreadyRated(ratingUser, user._id);
 
+        //response this all
         return res.status(200).json({ data: user, ok: true });
       });
   },

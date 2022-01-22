@@ -6,16 +6,20 @@ const SpotifyController = require("./controllers/SpotifyController");
 
 const routes = express.Router();
 
-routes.use("/login", AuthController.store);
+routes.use("/login", AuthController.authentication);
 routes.post("/register", UserController.store);
 
-routes.get("/search/:username", AuthController.index, UserController.index);
+routes.get(
+  "/search/:username",
+  AuthController.authrization,
+  UserController.index
+);
 routes.post(
   "/rating/:rating/:ratedUser",
-  AuthController.index,
+  AuthController.authrization,
   RatingController.store
 );
 
-routes.get("/spotify", SpotifyController.index);
+routes.get("/spotify/:search", SpotifyController.index);
 
 module.exports = routes;
