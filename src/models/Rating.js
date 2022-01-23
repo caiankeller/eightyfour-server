@@ -27,10 +27,10 @@ RatingSchema.statics.getAverage = async function (user) {
   return rate;
 };
 
-RatingSchema.statics.getAlreadyRated = async function (ratingUser, ratedUser) {
+RatingSchema.statics.getAlreadyRated = async function (user, ratedUser) {
   //returning if the user is already rated, and how much was the rating
   return await this.model("Rating")
-    .find({ ratingUser: ratingUser, ratedUser: ratedUser })
+    .find({ ratingUser: user, ratedUser: ratedUser })
     .then((re) => {
       if (re.length > 0) {
         return { alreadyRated: true, rating: re[0].rating };

@@ -19,7 +19,7 @@ module.exports = {
     await Rating.create({
       rating,
       ratedUser,
-      ratingUser,
+      ratingUser: user,
     }).then(() => {
       return res.status(200).send({ ok: true });
     });
