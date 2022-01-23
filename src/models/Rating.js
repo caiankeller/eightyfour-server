@@ -7,7 +7,7 @@ const RatingSchema = new mongoose.Schema({
   ratedUser: {
     type: mongoose.Schema.Types.ObjectId,
   },
-  ratingUser: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
   },
 });
@@ -18,11 +18,11 @@ RatingSchema.statics.getAverage = async function (user) {
     .then(async (ratings) => {
       let rate = 0;
 
-      //soming all rating from request user
+      //adding all rating from requested user
       await ratings.map((rating) => {
         rate += rating.rating;
       });
-      return rate;
+      return rate / ratings.length;
     });
   return rate;
 };
@@ -30,7 +30,7 @@ RatingSchema.statics.getAverage = async function (user) {
 RatingSchema.statics.getAlreadyRated = async function (user, ratedUser) {
   //returning if the user is already rated, and how much was the rating
   return await this.model("Rating")
-    .find({ ratingUser: user, ratedUser: ratedUser })
+    .find({ user: user, ratedUser: ratedUser })
     .then((re) => {
       if (re.length > 0) {
         return { alreadyRated: true, rating: re[0].rating };

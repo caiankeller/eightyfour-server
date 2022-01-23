@@ -15,6 +15,10 @@ $ node src/app.js
 We've taken off 🛫 on 3001 port
 ```
 
+> The rating user is saved as "user" in the database, this will be changed when I have time.
+
+> Other some issues will be resolved in the future.
+
 ## **Middleware**
 
 By passing the authorisation in the header, you may face 2 errors (I hope not).
@@ -39,6 +43,9 @@ or
 
 ### **/login**
 ____
+
+`get` This will return the logged user.
+
 **Params**
 
 Query
@@ -76,6 +83,9 @@ Query
 
 ### **/register**
 ____
+
+`post` This will save the user in database.
+
 **Params**
 
 Body
@@ -112,6 +122,9 @@ Body
 
 ### **/search**
 ____
+
+`get` This will return the user found in the database with the specified username.
+
 **Params**
 
 > /search/:username
@@ -150,6 +163,9 @@ Header
 
 ### **/rating**
 ____
+
+`post` This will save the user's rating in the database.
+
 **Params**
 
 > /rating/:rating/:ratedUser
@@ -174,6 +190,9 @@ Header
 
 ### **/spotify**
 ____
+
+`get`  This will return 20 selected song related with the search.
+
 **Params**
 
 > /spotify/:search
