@@ -6,15 +6,12 @@ module.exports = {
     const { spotify } = req.body;
 
     //verify token from jwt spotify token
-    //"jwt token spotify token ???" confuse? in the model i explain it better
     await Spotify.verifyToken(spotify, async (er, re) => {
       let spotify;
 
       if (er) {
-        //if error while verifing token, create a new token
         spotify = await Spotify.createToken();
       } else {
-        //return the spotify token in the spotify token
         spotify = re;
       }
 

@@ -6,11 +6,11 @@ require("dotenv").config();
 
 module.exports = {
   async authrization(req, res, next) {
-    var temp = req.headers["authorization"];
-    var temp = temp.split(" ");
-    const token = temp[1];
+    //cuts off bearer from token
+    var token = req.headers["authorization"].split(" ")[1];
 
     if (!token) res.status(401).send({ message: "token missing", ok: false });
+    //jwt verify
     else
       jwt.verify(token, process.env.JWT_SECRET, (er, decoded) => {
         if (er) res.status(401).send({ message: "token invalid", ok: false });
@@ -27,14 +27,14 @@ module.exports = {
         .status(400)
         .send({ message: "There is no user with that username", ok: false });
 
+    //by comparing the password of the username in the database
+    //with the password given by the bcrypt user
     bcrypt.compare(password, toVerify.password, async (er, re) => {
-      if (er) {
+      if (er)
         return res
           .status(401)
           .send({ message: "User or password are incorrect", ok: false });
-      }
-
-      if (re) {
+      else if (re) {
         const rating = await Rating.getAverage(toVerify._id);
 
         if (typeof toVerify.song === "undefined") song = "";
@@ -49,11 +49,11 @@ module.exports = {
         };
 
         const { _id } = user;
-        var token = jwt.sign({ _id }, process.env.JWT_SECRET, {
+        //should i avoid use that? this way
+        //I can write less while maintaining readability
+        var token = `Bearer ${jwt.sign({ _id }, process.env.JWT_SECRET, {
           expiresIn: 86400,
-        });
-
-        token = `Bearer ${token}`;
+        })}`;
 
         res.status(200).send({ token: token, user: user, ok: true });
       } else {

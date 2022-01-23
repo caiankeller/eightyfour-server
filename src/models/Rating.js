@@ -18,7 +18,7 @@ RatingSchema.statics.getAverage = async function (user) {
     .then(async (ratings) => {
       let rate = 0;
 
-      //get rating from an user some to return the value
+      //soming all rating from request user
       await ratings.map((rating) => {
         rate += rating.rating;
       });
