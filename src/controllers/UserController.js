@@ -37,7 +37,7 @@ module.exports = {
         return res.status(401).send({ message: "An error occurs", ok: false });
 
       await User.create({
-        user,
+        username: user,
         password: hash,
         bio,
         song,
