@@ -14,7 +14,7 @@ module.exports = {
 
     // rating under 0 and over 5 are not allowed
     if (rating < 0 || rating > 5)
-      return res.status(400).send({ message: "An error occurs", ok: false });
+      return res.status(400).send({ message: "An error occurred", ok: false });
 
     await Rating.create({
       rating,

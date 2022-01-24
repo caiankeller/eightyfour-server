@@ -23,11 +23,11 @@ We've taken off 🛫 on 3001 port
 
 By passing the authorisation in the header, you may face 2 errors (I hope not).
 
-`401` "token missing" | when the token wasn't sent.
+`401` "token missing" | When the token wasn't sent.
 
 or 
 
-`401` "token invalid" | when the token isn't valid.
+`401` "token invalid" | When the token isn't valid.
 
 ## **EndPoints**
 

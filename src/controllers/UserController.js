@@ -34,7 +34,7 @@ module.exports = {
     //encrypting password with bcrypt
     bcrypt.hash(password, 10, async (er, hash) => {
       if (er)
-        return res.status(401).send({ message: "An error occurs", ok: false });
+        return res.status(401).send({ message: "An error occurred", ok: false });
 
       await User.create({
         username: user,
