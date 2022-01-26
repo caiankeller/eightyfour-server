@@ -34,16 +34,24 @@ module.exports = {
     //encrypting password with bcrypt
     bcrypt.hash(password, 10, async (er, hash) => {
       if (er)
-        return res.status(401).send({ message: "An error occurred", ok: false });
+        return res
+          .status(401)
+          .send({ message: "An error occurred", ok: false });
 
       await User.create({
         username: user,
         password: hash,
         bio,
         song,
-      }).then(() => {
-        return res.status(200).send({ ok: true });
-      });
+      })
+        .then(() => {
+          return res.status(200).send({ ok: true });
+        })
+        .catch(() => {
+          return res
+            .status(400)
+            .send({ message: "An error occurred", ok: false });
+        });
     });
   },
   async index(req, res) {

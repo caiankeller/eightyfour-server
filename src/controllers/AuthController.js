@@ -6,11 +6,10 @@ require("dotenv").config();
 
 module.exports = {
   async authrization(req, res, next) {
-    //cuts off bearer from token
+    //cuts the Bearer of the token
     var token = req.headers["authorization"].split(" ")[1];
 
     if (!token) res.status(401).send({ message: "token missing", ok: false });
-    //jwt verify
     else
       jwt.verify(token, process.env.JWT_SECRET, (er, decoded) => {
         if (er) res.status(401).send({ message: "token invalid", ok: false });
@@ -36,10 +35,8 @@ module.exports = {
           .send({ message: "User or password are incorrect", ok: false });
       else if (re) {
         const rating = await Rating.getAverage(toVerify._id);
-
         if (typeof toVerify.song === "undefined") song = "";
         else song = toVerify.song;
-
         const user = {
           _id: toVerify._id,
           username: toVerify.username,
